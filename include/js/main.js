@@ -2,7 +2,6 @@ require(['include/js/babylon.custom.js']);
 require(['include/js/hand.min.1.3.8.js']);
 
 require(['include/js/classes/algorithm/astar.js']);
-require(['include/js/classes/algorithm/bt-prim.js']);
 
 setTimeout(function(){
   var canvas = document.getElementById('defaultCanvas');
