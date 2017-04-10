@@ -1,4 +1,5 @@
-var map = [
+var Game = {};
+Game.map = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0],
   [0,2,0,0,0,0,2,0,0,0,0,0,2,0,0,2,0,0,0,0,0,2,0,0,0,0,2,0],
@@ -40,3 +41,32 @@ var map = [
  * 4 - One way door (up only)
  * 9 - warp
  */
+
+function processMap(){
+  var size = {x: Game.map[0].length, y: Game.map.length};
+  for(var y = 0; y < size.y; y++){
+    for(var x = 0; x < size.x; x++){
+      var mapType = Game.map[y][x];
+      Game.map[y][x] = {
+        collide    : (mapType == 0),
+        isFood     : (mapType == 2 || mapType == 3),
+        hasFood    : (mapType == 2 || mapType == 3),
+        powerPellet: (mapType == 3),
+        upOnly     : (mapType == 4),
+        warp       : (mapType == 9)
+      };
+    }
+  }
+}
+
+function resetMap(){
+  var size = {x: Game.map[0].length, y: Game.map.length};
+  for(var y = 0; y < size.y; y++){
+    for(var x = 0; x < size.x; x++){
+      var currentTile = Game.map[y][x];
+      currentTile.hasFood = currentTile.isFood;
+    }
+  }
+}
+
+processMap();

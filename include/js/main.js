@@ -4,10 +4,11 @@ require(['include/js/hand.min.1.3.8.js']);
 require(['include/js/classes/algorithm/astar.js']);
 require(['include/js/classes/game.js']);
 
+var scene;
 setTimeout(function(){
   var canvas = document.getElementById('defaultCanvas');
   var engine = new BABYLON.Engine(canvas);
-  var scene = new BABYLON.Scene(engine);
+  scene = new BABYLON.Scene(engine);
   var keys = [];
 
   var light = new BABYLON.PointLight("lightName", BABYLON.Vector3.Zero(), scene);
@@ -27,6 +28,23 @@ setTimeout(function(){
       });
       position += 5;
     };
+
+    var size = {x: Game.map[0].length, y: Game.map.length};
+    var wallCount = 0;
+    for(var y = 0; y < size.y; y++){
+      for(var x = 0; x < size.x; x++){
+        var currentTile = Game.map[y][x];
+        if(currentTile.collide){
+          var box = new BABYLON.Mesh.CreateBox('wall'+wallCount, 1, scene);
+          box.position.z = x - size.x / 2;
+          box.position.x = y  -size.y / 2;
+          box.position.y = -50;
+          wallCount++;
+        }
+      }
+    }
+
+    cam.position.x = -40;
 
     // box.position = new BABYLON.Vector3(0, 2.5, 0);
 
