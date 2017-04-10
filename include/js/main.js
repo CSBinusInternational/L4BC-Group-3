@@ -11,12 +11,16 @@ setTimeout(function(){
   scene = new BABYLON.Scene(engine);
   var keys = [];
 
-  var light = new BABYLON.PointLight("lightName", BABYLON.Vector3.Zero(), scene);
+  // var light = new BABYLON.PointLight("lightName", BABYLON.Vector3.Zero(), scene);
+  var light0 = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
+  light0.diffuse = new BABYLON.Color3(1, 1, 1);
+  light0.specular = new BABYLON.Color3(1, 1, 1);
+  light0.groundColor = new BABYLON.Color3(0, 0, 0);
 
   var createScene = function () {
 
     new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 10, 0), scene);
-    var cam = new BABYLON.ArcRotateCamera("ArcRotateCamera", 0, 0, 5, new BABYLON.Vector3(0, 3, 0), scene);
+    var cam = new BABYLON.ArcRotateCamera("ArcRotateCamera", 0, 0.2, 36, new BABYLON.Vector3(0, 0, 0), scene);
     cam.attachControl(canvas);
 
     var loader = new BABYLON.AssetsManager(scene);
@@ -31,14 +35,27 @@ setTimeout(function(){
 
     var size = {x: Game.map[0].length, y: Game.map.length};
     var wallCount = 0;
+
+    var faceColors = new Array(6);
+    for(var i = 0; i < 6; i++)
+      faceColors[i] = new BABYLON.Color4(0,0,1,1);   // blue
+
+    var options = {
+      width: 1,
+      height: 1,
+      depth: 1,
+      faceColors : faceColors
+    };
+
     for(var y = 0; y < size.y; y++){
       for(var x = 0; x < size.x; x++){
         var currentTile = Game.map[y][x];
+
         if(currentTile.collide){
-          var box = new BABYLON.Mesh.CreateBox('wall'+wallCount, 1, scene);
+          var box = BABYLON.MeshBuilder.CreateBox('box'+wallCount, options, scene);
           box.position.z = x - size.x / 2;
-          box.position.x = y  -size.y / 2;
-          box.position.y = -50;
+          box.position.x = y - size.y / 2;
+          box.position.y = 0;
           wallCount++;
         }
       }
@@ -53,6 +70,7 @@ setTimeout(function(){
   };  // End of createScene function
 
   scene = createScene();
+
 
   // Register a render loop to repeatedly render the scene
   engine.runRenderLoop(function () {
@@ -83,4 +101,6 @@ setTimeout(function(){
   window.addEventListener("resize", function () {
     engine.resize();
   });
+
+  scene.clearColor = new BABYLON.Color3(0, 0, 0); // Change the scene clear color to black
 },1000);
