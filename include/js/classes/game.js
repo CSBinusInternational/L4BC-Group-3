@@ -1,3 +1,4 @@
+require(['include/js/classes/Player.js']);
 var Game = {};
 Game.map = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -70,3 +71,7 @@ function resetMap(){
 }
 
 processMap();
+
+setTimeout(function(){
+  EntityManager.pushEntity(new Player(), 'player');
+}, 500);
