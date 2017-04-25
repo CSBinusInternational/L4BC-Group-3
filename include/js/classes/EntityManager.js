@@ -9,6 +9,9 @@ EntityManager.prototype.pushEntity = function (entity, tagName) {
    * A function to store entity
    */
 
+  if(typeof entity.start === 'function')
+    entity.start();
+
   entity.UID = ((new Date()).getTime() + "" + Number.parseInt(Math.random() * 100));
   entity.tagName = tagName;
   this.entityList.push(entity);
