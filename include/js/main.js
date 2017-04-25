@@ -2,15 +2,15 @@ require(['include/js/babylon.custom.js']);
 require(['include/js/hand.min.1.3.8.js']);
 
 require(['include/js/classes/algorithm/astar.js']);
-require(['include/js/classes/game.js']);
 require(['include/js/classes/EntityManager.js']);
+require(['include/js/classes/game.js']);
 
 var scene;
+var keys_pressed = [];
 setTimeout(function(){
   var canvas = document.getElementById('defaultCanvas');
   var engine = new BABYLON.Engine(canvas);
   scene = new BABYLON.Scene(engine);
-  var keys = [];
 
   // var light = new BABYLON.PointLight("lightName", BABYLON.Vector3.Zero(), scene);
   var light0 = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
@@ -77,19 +77,19 @@ setTimeout(function(){
   engine.runRenderLoop(function () {
     window.addEventListener("keydown",
         function(e){
-            keys[e.keyCode] = true;
+            keys_pressed[e.keyCode] = true;
             checkCombinations(e);
         },
     false);
 
     window.addEventListener('keyup',
         function(e){
-            keys[e.keyCode] = false;
+            keys_pressed[e.keyCode] = false;
         },
     false);
 
     function checkCombinations(e){
-        if(keys["a".charCodeAt(0)] && e.ctrlKey){
+        if(keys_pressed["a".charCodeAt(0)] && e.ctrlKey){
             alert("You're not allowed to mark all content!");
             e.preventDefault();
         }
