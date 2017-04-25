@@ -3,6 +3,7 @@ require(['include/js/hand.min.1.3.8.js']);
 
 require(['include/js/classes/algorithm/astar.js']);
 require(['include/js/classes/game.js']);
+require(['include/js/classes/EntityManager.js']);
 
 var scene;
 setTimeout(function(){
@@ -72,7 +73,7 @@ setTimeout(function(){
   scene = createScene();
 
 
-  // Register a render loop to repeatedly render the scene
+  /* Register a render loop to repeatedly render the scene */
   engine.runRenderLoop(function () {
     window.addEventListener("keydown",
         function(e){
@@ -92,6 +93,13 @@ setTimeout(function(){
             alert("You're not allowed to mark all content!");
             e.preventDefault();
         }
+    }
+
+    /* Execute entity frame script */
+    var el = EntityManager.entityList;
+    for(var i = 0; i < el.length; i++){
+      if(typeof el[i].update === 'function')
+        el[i].update();
     }
 
     scene.render();
