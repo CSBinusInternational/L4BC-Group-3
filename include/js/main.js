@@ -8,6 +8,7 @@ require(['include/js/classes/game.js']);
 var scene;
 var as;
 var keys_pressed = [];
+var size;
 setTimeout(function(){
   var canvas = document.getElementById('defaultCanvas');
   var engine = new BABYLON.Engine(canvas);
@@ -15,14 +16,14 @@ setTimeout(function(){
 
   // var light = new BABYLON.PointLight("lightName", BABYLON.Vector3.Zero(), scene);
   var light0 = new BABYLON.HemisphericLight("Hemi0", new BABYLON.Vector3(0, 1, 0), scene);
-  light0.diffuse = new BABYLON.Color3(1, 1, 1);
-  light0.specular = new BABYLON.Color3(1, 1, 1);
+  light0.diffuse = new BABYLON.Color3(0, 0, 0);
+  light0.specular = new BABYLON.Color3(0, 0, 0);
   light0.groundColor = new BABYLON.Color3(0, 0, 0);
 
   var createScene = function () {
 
     new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 10, 0), scene);
-    var cam = new BABYLON.ArcRotateCamera("ArcRotateCamera", 0, 0.2, 36, new BABYLON.Vector3(0, 0, 0), scene);
+    var cam = new BABYLON.ArcRotateCamera("ArcRotateCamera", 0, 0.6, 36, new BABYLON.Vector3(0, 0, 0), scene);
     cam.attachControl(canvas);
 
     var loader = new BABYLON.AssetsManager(scene);
@@ -35,9 +36,8 @@ setTimeout(function(){
       position += 5;
     };
 
-    var size = {x: Game.map[0].length, y: Game.map.length};
     var wallCount = 0;
-
+    size = {x: Game.map[0].length, y: Game.map.length};
     var faceColors = new Array(6);
     for(var i = 0; i < 6; i++)
       faceColors[i] = new BABYLON.Color4(0,0,1,1);   // blue
@@ -127,4 +127,4 @@ setTimeout(function(){
     return true;
   });
   console.log(paths);
-},2000);
+},3000);

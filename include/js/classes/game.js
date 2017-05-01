@@ -74,4 +74,4 @@ processMap();
 
 setTimeout(function(){
   EntityManager.pushEntity(new Player(), 'player');
-}, 500);
+}, 1000);
