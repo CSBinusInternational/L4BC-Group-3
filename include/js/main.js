@@ -6,6 +6,7 @@ require(['include/js/classes/EntityManager.js']);
 require(['include/js/classes/game.js']);
 
 var scene;
+var as;
 var keys_pressed = [];
 setTimeout(function(){
   var canvas = document.getElementById('defaultCanvas');
@@ -111,4 +112,19 @@ setTimeout(function(){
   });
 
   scene.clearColor = new BABYLON.Color3(0, 0, 0); // Change the scene clear color to black
-},1000);
+
+  /* A* Debug */
+  var start_node = new Node({'x':1,'y':1}, 0, 0);
+  var end_node = new Node({'x':6,'y':13}, 0, 0);
+  as = new AStar(start_node, end_node);
+  var paths = as.solve(false, function(loc){
+    if(loc.x < 0 || loc.x >= Game.map[0].length || loc.y < 0 || loc.y >= Game.map.length)
+    return false;
+
+    if(Game.map[loc.y][loc.x].collide)
+    return false;
+
+    return true;
+  });
+  console.log(paths);
+},2000);
