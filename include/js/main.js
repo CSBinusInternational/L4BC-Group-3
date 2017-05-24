@@ -9,6 +9,9 @@ var scene;
 var as;
 var keys_pressed = [];
 var size;
+var game_start = false;
+var press_key_interval = null;
+
 setTimeout(function(){
   var canvas = document.getElementById('defaultCanvas');
   var engine = new BABYLON.Engine(canvas);
@@ -96,11 +99,25 @@ setTimeout(function(){
         }
     }
 
-    /* Execute entity frame script */
-    var el = EntityManager.entityList;
-    for(var i = 0; i < el.length; i++){
-      if(typeof el[i].update === 'function')
-        el[i].update();
+    /*
+     * Execute entity frame script if the game is started. If game is not started,
+     * we want to check if the user has pressed any movement keys (WASD). If user
+     * pressed any movement key, toggle game ready state.
+     */
+    if(game_start){
+      var el = EntityManager.entityList;
+      for(var i = 0; i < el.length; i++){
+        if(typeof el[i].update === 'function')
+          el[i].update();
+      }
+    }else{
+      window.addEventListener('keydown', function(e){
+        if(e.keyCode === 87 || e.keyCode === 65 || e.keyCode === 83 || e.keyCode === 68){  // W or A or S or D
+          clearTimeout(press_key_interval); // End the timeout loop
+          document.getElementById('press-to-start').classList.add('disable'); // Add disabled class
+          game_start = true; // Start the game
+        }
+      });
     }
 
     scene.render();
@@ -128,3 +145,14 @@ setTimeout(function(){
   });
   console.log(paths);
 },3000);
+
+press_key_interval = setInterval(function(){
+  var menuText = document.getElementById('press-to-start'); // Get reference to the press key strt text
+
+  // Toggle hidden state to make it blink
+  if(menuText.classList.contains('hidden')){ // The menu text contains hidden class
+    menuText.classList.remove('hidden'); // Remove the hidden class
+  }else{
+    menuText.classList.add('hidden'); // Add hidden class if not found
+  }
+}, 1000);

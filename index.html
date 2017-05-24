@@ -18,10 +18,37 @@
           width: 100%;
           height: 100%;
       }
+
+      #press-to-start{
+        color: white;
+        position: fixed;
+        width: 502px;
+        height: 42px;
+        left: calc(50% - 251px);
+        top: calc(50% - 21px);
+        text-align: center;
+      }
+      #press-to-start h1{
+        display: inline-block;
+        margin: 0;
+      }
+
+      #press-to-start img{
+        width: 46px;
+        position: relative;
+        top: 6px;
+      }
+
+      #press-to-start.disable, #press-to-start.hidden{
+        display: none;
+      }
     </style>
   </head>
 
   <body style="background: black;">
+    <div id="press-to-start">
+      <h1>Press any move key (</h1> <img src="include/wasd.png" /> <h1>) to start</h1>
+    </div>
   </body>
 
   <!-- Load requirejs -->
