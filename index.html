@@ -42,12 +42,22 @@
       #press-to-start.disable, #press-to-start.hidden{
         display: none;
       }
+
+      #player-score-container{
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        color: white;
+      }
     </style>
   </head>
 
   <body style="background: black;">
     <div id="press-to-start">
       <h1>Press any move key (</h1> <img src="include/wasd.png" /> <h1>) to start</h1>
+    </div>
+    <div id="player-score-container">
+      Player score: <span id="player-score">0</span>
     </div>
   </body>
 

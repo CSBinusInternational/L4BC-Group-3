@@ -107,6 +107,7 @@ Player.prototype.update = function () {
       this.score++; // Increment player's score
       Game.map[this.position.y][this.position.x].hasFood = 0; // Remove the reference in the world map
       scene.getMeshByName("pellet"+(Game.map[0].length * this.position.x + this.position.y)).dispose();
+      document.getElementById('player-score').innerText = this.score;
     }
   }
 
