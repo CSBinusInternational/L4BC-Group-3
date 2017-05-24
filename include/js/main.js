@@ -1,8 +1,12 @@
 require(['include/js/babylon.custom.js']);
 require(['include/js/hand.min.1.3.8.js']);
 
+require(['include/js/classes/Ghost.js']);
 require(['include/js/classes/algorithm/astar.js']);
 require(['include/js/classes/EntityManager.js']);
+
+require(['include/js/classes/RedGhost.js']);
+
 require(['include/js/classes/game.js']);
 
 var scene;
@@ -69,7 +73,7 @@ setTimeout(function(){
             var pellet = BABYLON.Mesh.CreateSphere("pellet"+(Game.map[0].length * x + y), 1, 0.4, scene);
           else
             var pellet = BABYLON.Mesh.CreateSphere("pellet"+(Game.map[0].length * x + y), 1, 0.9, scene);
-       
+
           pellet.position.z = x - size.x / 2;
           pellet.position.x = y - size.y / 2;
           pellet.position.y = 0;
