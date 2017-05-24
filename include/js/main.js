@@ -11,6 +11,7 @@ var keys_pressed = [];
 var size;
 var game_start = false;
 var press_key_interval = null;
+var wallCount = 0;
 
 setTimeout(function(){
   var canvas = document.getElementById('defaultCanvas');
@@ -25,6 +26,7 @@ setTimeout(function(){
 
   var createScene = function () {
 
+    scene.collisionsEnabled = true; // Check collision
     new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 10, 0), scene);
     var cam = new BABYLON.ArcRotateCamera("ArcRotateCamera", 0, 0.6, 36, new BABYLON.Vector3(0, 0, 0), scene);
     cam.attachControl(canvas);
@@ -39,7 +41,6 @@ setTimeout(function(){
       position += 5;
     };
 
-    var wallCount = 0;
     size = {x: Game.map[0].length, y: Game.map.length};
     var faceColors = new Array(6);
     for(var i = 0; i < 6; i++)
@@ -57,7 +58,8 @@ setTimeout(function(){
         var currentTile = Game.map[y][x];
 
         if(currentTile.collide){
-          var box = BABYLON.MeshBuilder.CreateBox('box'+wallCount, options, scene);
+          var box = BABYLON.MeshBuilder.CreateBox('box'+(Game.map[0].length * x + y), options, scene);
+          box.checkCollisions = true;
           box.position.z = x - size.x / 2;
           box.position.x = y - size.y / 2;
           box.position.y = 0;

@@ -32,6 +32,7 @@ Game.map = [
   [0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0],
   [0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 ];
 
 /* Map legend */
@@ -61,13 +62,18 @@ function processMap(){
 }
 
 function resetMap(){
+  // var foodCount = 0;
   var size = {x: Game.map[0].length, y: Game.map.length};
   for(var y = 0; y < size.y; y++){
     for(var x = 0; x < size.x; x++){
       var currentTile = Game.map[y][x];
       currentTile.hasFood = currentTile.isFood;
+
+      // if(currentTile.isFood)
+        // foodCount++;
     }
   }
+  // return foodCount;
 }
 
 processMap();
