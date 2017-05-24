@@ -64,7 +64,16 @@ setTimeout(function(){
           box.position.x = y - size.y / 2;
           box.position.y = 0;
           wallCount++;
-        }
+        }else if(currentTile.isFood){
+          if(!currentTile.powerPellet)
+            var pellet = BABYLON.Mesh.CreateSphere("pellet"+(Game.map[0].length * x + y), 1, 0.4, scene);
+          else
+            var pellet = BABYLON.Mesh.CreateSphere("pellet"+(Game.map[0].length * x + y), 1, 0.9, scene);
+       
+          pellet.position.z = x - size.x / 2;
+          pellet.position.x = y - size.y / 2;
+          pellet.position.y = 0;
+       }
       }
     }
 
