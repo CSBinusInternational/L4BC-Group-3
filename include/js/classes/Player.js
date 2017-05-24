@@ -7,6 +7,7 @@ class Player{
     this.allow_move = true;
     this.has_teleport = false;
     this.last_position = {'x': 0, 'y': 0};
+    this.score = 0; // Track the player's score
   }
 }
 
@@ -99,6 +100,13 @@ Player.prototype.update = function () {
         break;
       default:
 
+    }
+
+    // Eat the food pellet
+    if(Game.map[this.position.y][this.position.x].hasFood){
+      this.score++; // Increment player's score
+      Game.map[this.position.y][this.position.x].hasFood = 0; // Remove the reference in the world map
+      scene.getMeshByName("pellet"+(Game.map[0].length * this.position.x + this.position.y)).dispose();
     }
   }
 
