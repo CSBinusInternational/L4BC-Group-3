@@ -42,15 +42,17 @@ PinkGhost.prototype.update = function () { // Overwrite the parent's update func
    * reached, randomize another point.
    */
 
-  if(this.path_to_follow.length == 1)
+  if(this.path_to_follow.length <= 1)
   this.newPath();
 
   this.moveTo(this.path_to_follow[1]);
   this.move();
 
   /* Remove the current node when the ghost has arived to the current node */
-  if(this.position.x == this.path_to_follow[1].x && this.position.y == this.path_to_follow[1].y){
-    this.path_to_follow.splice(1,1);
+  if(this.path_to_follow[1] && this.position){
+    if(this.position.x == this.path_to_follow[1].x && this.position.y == this.path_to_follow[1].y){
+      this.path_to_follow.splice(1,1);
+    }
   }
 };
 
@@ -59,7 +61,9 @@ PinkGhost.prototype.newPath = function () {
 
   var player_object = EntityManager.getEntity("player"); // Get the player
   var start_node = new Node(this.position, 0, 0);        // Set the starting node as the ghost's position
-  var end_node = new Node(player_object.position, 0, 0); // Set the ending node to the player's position
+  var random_end = {x: Math.round(Math.random() * 100) % Game.map[0].length, y: Math.round(Math.random() * 100) % Game.map.length};
+
+  var end_node = new Node(random_end, 0, 0); // Set the ending node to the player's position
   as = new AStar(start_node, end_node);                  // Create new instance of the algorithm
   var paths = as.solve(false, function(loc){             // Call solver function
     /*
@@ -77,4 +81,6 @@ PinkGhost.prototype.newPath = function () {
   });
 
   this.path_to_follow = paths; // Save the paths
+
+  console.log(paths);
 };
