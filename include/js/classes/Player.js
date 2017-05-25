@@ -34,7 +34,18 @@ Player.prototype.start = function () {
 };
 
 Player.prototype.update = function () {
-  1
+  for(var i = 0; i < EntityManager.entityList.length; i++){
+    if(game_start){
+      if(EntityManager.entityList[i].tagName == this.tagName)
+        continue;
+
+      if(EntityManager.entityList[i].position.x == this.position.x && EntityManager.entityList[i].position.y == this.position.y){
+        game_start = false;
+        this.position = EntityManager.entityList[i].position;
+        alert('You died!');
+      }
+    }
+  }
 
   /* Basic input script */
   var that = this;
