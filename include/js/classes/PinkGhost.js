@@ -83,4 +83,6 @@ PinkGhost.prototype.newPath = function () {
   this.path_to_follow = paths; // Save the paths
 
   console.log(paths);
+  paths.splice(paths.length - 1, 1)// Pop the end of the path to prevent stucking
+  console.log(paths);
 };
