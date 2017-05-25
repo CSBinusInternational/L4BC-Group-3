@@ -6,6 +6,7 @@ require(['include/js/classes/algorithm/astar.js']);
 require(['include/js/classes/EntityManager.js']);
 
 require(['include/js/classes/RedGhost.js']);
+require(['include/js/classes/OrangeGhost.js']);
 
 require(['include/js/classes/game.js']);
 

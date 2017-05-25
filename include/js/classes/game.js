@@ -81,4 +81,5 @@ processMap();
 setTimeout(function(){
   EntityManager.pushEntity(new Player(), 'player');
   EntityManager.pushEntity(new RedGhost(), 'redGhost');
+  EntityManager.pushEntity(new OrangeGhost(), 'orangeGhost');
 }, 1000);
