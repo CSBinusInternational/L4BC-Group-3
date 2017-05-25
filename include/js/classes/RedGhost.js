@@ -33,15 +33,20 @@ RedGhost.prototype.start = function () { // Overwrite the parent's start functio
 };
 
 RedGhost.prototype.update = function () { // Overwrite the parent's update function
-  var player_object = EntityManager.getEntity("player");
-  var start_node = new Node(this.position, 0, 0);
-  var end_node = new Node(player_object.position, 0, 0);
-  as = new AStar(start_node, end_node);
-  var paths = as.solve(false, function(loc){
-    if(loc.x < 0 || loc.x >= Game.map[0].length || loc.y < 0 || loc.y >= Game.map.length)
+  var player_object = EntityManager.getEntity("player"); // Get the player
+  var start_node = new Node(this.position, 0, 0);        // Set the starting node as the ghost's position
+  var end_node = new Node(player_object.position, 0, 0); // Set the ending node to the player's position
+  as = new AStar(start_node, end_node);                  // Create new instance of the algorithm
+  var paths = as.solve(false, function(loc){             // Call solver function
+    /*
+     * The valid move checker function. This function will be used by the
+     * algorithm to determine if the next node is a valid node.
+     */
+
+    if(loc.x < 0 || loc.x >= Game.map[0].length || loc.y < 0 || loc.y >= Game.map.length) // Check if the current node is in the map
     return false;
 
-    if(Game.map[loc.y][loc.x].collide)
+    if(Game.map[loc.y][loc.x].collide) // Check if the current node is a wall
     return false;
 
     return true;
