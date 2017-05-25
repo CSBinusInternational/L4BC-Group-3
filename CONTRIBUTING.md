@@ -2,19 +2,19 @@
 
 ## Table of Content
 1. **Entity Manager**
-  2. What is the Entity Manager?
-  3. Methods
-4. ** The Player**
-  5. Variables
-  6. Constructor
-  5. Methods
-2. **Ghost NPC**
-  3. What is this?
-  5. Variable
-  7. Methods
-8. **Game**
-  9. Variable
-  10. Methods
+    1. What is the Entity Manager?
+    1. Methods
+1. **The Player**
+    1. Variables
+    1. Constructor
+    1. Methods
+1. **Ghost NPC**
+    1. What is this?
+    1. Variable
+    1. Methods
+1. **Game**
+    1. Variable
+    1. Methods
 
 ## **Entity Manager**
 ### What is the Entity Manager
@@ -28,7 +28,7 @@ Method     | Description | Usage  | Example
 ## **The Player**
 ### variable
 Name     | Description  
------------|-------------
+---------|-------------
 direction  | The traveling direction of the player. Integer from 0 - 3. 0: up, 1: left, 2: down, 3: right
 moveSpeed | The movement speed of the player. How much unit the player will move every frame
 allow_move | Returns whether the player has a valid move or not (Read only)
@@ -37,7 +37,7 @@ score | The player's current score. Incremented once the player eat a pellet
 
 ### Constructor
 Method     | Description | Usage
------------|-------------|
+-----------|-------------|-------
 Player | Creates a new player object. | `new Player()`
 
 ### Methods
@@ -58,7 +58,7 @@ direction | The traveling direction of the NPC. Integer from 0 - 3. 0: up, 1: le
 
 ### Methods
 Method     | Description | Usage | Example
------------|------------
+-----------|-------------|-------|---------
 start | The function that will be executed once the object is instantiated | |
 update | The function that will be executed every frame | |
 moveTo | Set new direction for the NPC. Accepts position object | `moveTo(object coordinate)` | `moveTo({x: 11, y: 13})`
@@ -68,10 +68,10 @@ checkSquare | Convert the current NPC's world coordinate to `Game.map` coordinat
 ## **Game**
 ### Variable
 Name     | Description
------------|------------
+---------|------------
 map | A 2D array representing the game's map. In the start of the game, the value of the array is integer. The array may be converted to object by calling `processMap()` function
 ### Methods
 Method     | Description | Usage | Example
------------|------------
+-----------|-------------|-------|---------
 processMap | Convert the integer representation of the map to an object representation. This method is global | `void processMap()` | `processMap()`
 resetMap | Reset the object representation of the map. Useful to reset game map state. This method is global | `void resetMap()` | `resetMap()`
