@@ -49,8 +49,10 @@ OrangeGhost.prototype.update = function () { // Overwrite the parent's update fu
   this.move();
 
   /* Remove the current node when the ghost has arived to the current node */
-  if(this.position.x == this.path_to_follow[1].x && this.position.y == this.path_to_follow[1].y){
-    this.path_to_follow.splice(1,1);
+  if(this.path_to_follow[1] && this.position){
+    if(this.position.x == this.path_to_follow[1].x && this.position.y == this.path_to_follow[1].y){
+      this.path_to_follow.splice(1,1);
+    }
   }
 };
 
