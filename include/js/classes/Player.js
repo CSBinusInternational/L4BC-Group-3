@@ -125,6 +125,8 @@ Player.prototype.update = function () {
 
         if(Game.map[this.position.y - 1][this.position.x] && !Game.map[this.position.y - 1][this.position.x].collide) // Check if the next movement will lead to a wall
         scene.getMeshByName('playerModel').position.x -= this.moveSpeed; // Move the character if doing so will not lead to a wall (this move goes up)
+
+        this.playerMod.loadedMeshes[1].rotation.y = 160;// Set object rotation
         break;
       case 1:
         this.position.x = this.checkSquare().x;
@@ -132,6 +134,8 @@ Player.prototype.update = function () {
 
         if(Game.map[this.position.y][this.position.x - 1] && !Game.map[this.position.y][this.position.x - 1].collide)
         scene.getMeshByName('playerModel').position.z -= this.moveSpeed; // Left
+
+        this.playerMod.loadedMeshes[1].rotation.y = 240;// Set object rotation
         break;
 
       case 2:
@@ -140,6 +144,8 @@ Player.prototype.update = function () {
 
         if(Game.map[this.position.y + 1][this.position.x] && !Game.map[this.position.y + 1][this.position.x].collide && !Game.map[this.position.y + 1][this.position.x].upOnly)
         scene.getMeshByName('playerModel').position.x += this.moveSpeed; // down
+
+        this.playerMod.loadedMeshes[1].rotation.y = 0;// Set object rotation
         break;
 
       case 3:
@@ -148,10 +154,14 @@ Player.prototype.update = function () {
 
         if(Game.map[this.position.y][this.position.x + 1] && !Game.map[this.position.y][this.position.x + 1].collide)
         scene.getMeshByName('playerModel').position.z += this.moveSpeed; // Right
+
+        this.playerMod.loadedMeshes[1].rotation.y = 80;// Set object rotation
         break;
       default:
 
     }
+
+    // console.log(this.playerMod.loadedMeshes[1].rotation.y);
 
     // Eat the food pellet
     if(Game.map[this.position.y][this.position.x].hasFood){
