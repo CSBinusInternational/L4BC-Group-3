@@ -82,7 +82,13 @@ PinkGhost.prototype.newPath = function () {
 
   this.path_to_follow = paths; // Save the paths
 
-  console.log(paths);
-  paths.splice(paths.length - 1, 1)// Pop the end of the path to prevent stucking
+  for(var i = 0; i < paths.length; i++){
+    if((paths[i].x >= 11 && paths[i].x <= 16) && (paths[i].y >= 13 && paths[i].y <= 15)){
+      if(paths[i].x == 14 && (paths[i].y >= 12 && paths[i].y <= 14)){
+        paths.splice(paths.length - 1, 1)// Pop the end of the path to prevent stucking
+      }
+    }
+  }
+
   console.log(paths);
 };
