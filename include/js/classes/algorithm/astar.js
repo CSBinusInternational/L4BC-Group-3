@@ -38,7 +38,7 @@ class AStar{
  * Function will return the nodes from the start to the end (array)
  */
 AStar.prototype.solve = function (allow_diagonal, move_checker) {
-  console.log('Searching for best path');
+  // console.log('Searching for best path');
   var t0 = performance.now();
 
   if(typeof allow_diagonal !== 'boolean')      // Check if allow_diagonal is given
@@ -59,7 +59,7 @@ AStar.prototype.solve = function (allow_diagonal, move_checker) {
     /* Check if the current node is the end node */
     if(selected.location.x == this.end.location.x && selected.location.y == this.end.location.y){
       var t1 = performance.now();
-      console.log("Search took " + (t1 - t0) + " milliseconds.");
+      // console.log("Search took " + (t1 - t0) + " milliseconds.");
 
       var path_to_evaluate = selected;          // Variable the will hold the node to analyze
       var final_path = [];                      // Array that will hold all the path taken to the end

@@ -1,8 +1,8 @@
 class RedGhost extends Ghost {
   constructor(){
-    super({x: 11, y: 13}, 'redGhostModel', 0.07);
+    super({x: 11, y: 11}, 'redGhostModel', 0.07);
 
-    this.start_pos = {x: 11, y: 13};
+    this.start_pos = {x: 13, y: 11};
     this.my_model = null;
   }
 }
@@ -48,6 +48,6 @@ RedGhost.prototype.update = function () { // Overwrite the parent's update funct
   });
 
   this.moveTo(paths[1]);
-  console.log(this.position, paths[0], paths[1]);
+  // console.log(this.position, paths[0], paths[1]);
   this.move();
 };
