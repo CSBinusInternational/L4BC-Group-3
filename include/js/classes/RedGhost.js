@@ -29,10 +29,18 @@ RedGhost.prototype.start = function () { // Overwrite the parent's start functio
     playerMod.position.y = 0;
 
     that.my_model = scene.getMeshByName('redGhostModel');
+    this.playerMod = scene.getMeshByName('playerModel');
+    var loader = new BABYLON.AssetsManager(scene);
+    var redGhost = loader.addMeshTask("redGhost", "", "include/models/", "ghost-red.obj");
+    loader.load();
+    setTimeout(function(){
+      that.objectModel = redGhost;
+    },50)
   },2000);
 };
 
 RedGhost.prototype.update = function () { // Overwrite the parent's update function
+  this.objectModel.loadedMeshes[2].position = scene.getMeshByName('redGhostModel').position; // Set the model position with the placeholder's position
   var player_object = EntityManager.getEntity("player"); // Get the player
   var start_node = new Node(this.position, 0, 0);        // Set the starting node as the ghost's position
   var end_node = new Node(player_object.position, 0, 0); // Set the ending node to the player's position
