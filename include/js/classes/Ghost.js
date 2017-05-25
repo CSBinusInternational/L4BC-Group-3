@@ -8,6 +8,7 @@ class Ghost{
     this.position = {x: start_pos.x, y: start_pos.y};
     this.meshName = my_name;
     this.moveSpeed = my_speed;
+    this.objectModel = null;
 
     /* Set the default starting direction. Make it random to make the game interesting */
     this.direction = Math.round((Math.random() * 10) % 4); // Player move direction (0: up, 1: left, 2: down, 3: right)

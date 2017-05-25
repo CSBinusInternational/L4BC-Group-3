@@ -11,15 +11,16 @@ class Player{
 }
 
 Player.prototype.start = function () {
+  var that = this;
   setTimeout(function(){
     var faceColors = new Array(6);
     for(var i = 0; i < 6; i++)
       faceColors[i] = new BABYLON.Color4(1,1,0,1);   // yellow
 
     var options = {
-      width: 0.8,
-      height: 0.8,
-      depth: 0.8,
+      width: 0.01,
+      height: 0.01,
+      depth: 0.01,
       faceColors : faceColors
     };
 
@@ -30,10 +31,17 @@ Player.prototype.start = function () {
     this.playerMod.position.y = 0;
 
     this.playerMod = scene.getMeshByName('playerModel');
+    var loader = new BABYLON.AssetsManager(scene);
+    var pacman = loader.addMeshTask("pacman", "", "include/models/", "pacman.obj");
+    loader.load();
+    setTimeout(function(){
+      that.playerMod = pacman;
+    },50)
   },2000);
 };
 
 Player.prototype.update = function () {
+  this.playerMod.loadedMeshes[1].position = scene.getMeshByName('playerModel').position; // Set the model position with the placeholder's position
   for(var i = 0; i < EntityManager.entityList.length; i++){
     if(game_start){
       if(EntityManager.entityList[i].tagName == this.tagName)
