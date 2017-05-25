@@ -15,6 +15,7 @@
 1. **Game**
     1. Variable
     1. Methods
+1. **FAQ**
 
 ## **Entity Manager**
 ### What is the Entity Manager
@@ -75,3 +76,7 @@ Method     | Description | Usage | Example
 -----------|-------------|-------|---------
 processMap | Convert the integer representation of the map to an object representation. This method is global | `void processMap()` | `processMap()`
 resetMap | Reset the object representation of the map. Useful to reset game map state. This method is global | `void resetMap()` | `resetMap()`
+
+## **FAQ**
+### How do I get the world coordinate of an entity (NPC or player)?
+Use `scene.getMeshByName(meshName).position`. This will return Vector3 object. Use the `Z` property to get Left and Right, Use the `X` property to get Forward (Up) and Backward (Down).
