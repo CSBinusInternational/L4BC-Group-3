@@ -10,6 +10,7 @@ EntityManager.prototype.pushEntity = function (entity, tagName) {
    */
 
   if(typeof entity.start === 'function')
+    entity.awake(); // The awake function will be executed before the start function.
     entity.start();
 
   entity.UID = ((new Date()).getTime() + "" + Number.parseInt(Math.random() * 100));
