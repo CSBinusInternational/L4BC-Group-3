@@ -2,22 +2,22 @@
 *A game of Pacman*
 
 ## **Table of Content** ##
-- **Overview**
+- [**Overview**](#overview)
   - Theme / Setting / Genre
   - Core Gameplay Mechanics Brief
   - Targeted platforms
   - Project Scope
   - Project Description
-- **Story and Gameplay**
+- [**Story and Gameplay**](#story-and-gameplay)
   - Story (Brief)
   - Story (Detailed)
   - Gameplay (Brief)
   - Gameplay (Detailed)
-- **Assets Needed**
+- [**Assets Needed**](#assets-needed)
   - 2D
   - 3D
   - Animation
-- **Schedule**
+- [**Schedule**](#schedule)
 
 ## **Overview** ##
 ### Theme / Setting / Genre ###
@@ -84,7 +84,7 @@ No 2D assets where used
     - Ghost’s Floating Animation for moving
 
 ## **Schedule** ##
-![Schedule](documentation/schedule.png)
+![Schedule](https://github.com/CSBinusInternational/L4BC-Group-3/blob/463c5732df23fd4955b81c58ee2204c19479835e/documentation/schedule.png)
 
   [4eb6040a]: https://github.com/krisnarocks "Stanislaus Krisna's Github"
   [09a79b58]: https://github.com/glaciesice "Andre Valentino's Github"
