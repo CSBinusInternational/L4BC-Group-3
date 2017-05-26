@@ -14,12 +14,12 @@ PinkGhost.prototype.start = function () { // Overwrite the parent's start functi
   setTimeout(function(){
     var faceColors = new Array(6);
     for(var i = 0; i < 6; i++)
-      faceColors[i] = new BABYLON.Color4(1,0.2,0.6,1);   // pink
+      faceColors[i] = new BABYLON.Color4(1,0.2,0.6,0);   // pink
 
     var options = {
-      width: 0.8,
-      height: 0.8,
-      depth: 0.8,
+      width: 0.01,
+      height: 0.01,
+      depth: 0.01,
       faceColors : faceColors
     };
 
@@ -31,11 +31,32 @@ PinkGhost.prototype.start = function () { // Overwrite the parent's start functi
     playerMod.position.y = 0;
 
     that.my_model = scene.getMeshByName('pinkGhostModel');
+    this.playerMod = scene.getMeshByName('playerModel');
+    var loader = new BABYLON.AssetsManager(scene);
+    var pinkGhost = loader.addMeshTask("pinkGhost", "", "include/models/", "ghost-pink.obj");
+    loader.load();
+    setTimeout(function(){
+      that.objectModel = pinkGhost;
+    },50);
   },2000);
   this.newPath();
 };
 
 PinkGhost.prototype.update = function () { // Overwrite the parent's update function
+  this.objectModel.loadedMeshes[0].position = scene.getMeshByName('pinkGhostModel').position; // Set the model position with the placeholder's position
+
+  if(this.direction == 1)
+  this.objectModel.loadedMeshes[0].rotation.y = 0; // Look left when the direction is 1 (left)
+
+  if(this.direction == 3)
+  this.objectModel.loadedMeshes[0].rotation.y = 179; // Look right when the direction is 3 (right)
+
+  if(this.direction == 0)
+  this.objectModel.loadedMeshes[0].rotation.y = 89.5; // Look up when the direction is 0 (up)
+
+  if(this.direction == 2)
+  this.objectModel.loadedMeshes[0].rotation.y = 180.5; // Look down when the direction is 2 (down)
+
   /*
    * To get a random behaviour in the pink ghost, select a random point in the
    * map and follow the path excatly to that spot. Once the spot has been
