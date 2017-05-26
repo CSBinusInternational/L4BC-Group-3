@@ -42,7 +42,7 @@ OrangeGhost.prototype.start = function () { // Overwrite the parent's start func
 };
 
 OrangeGhost.prototype.update = function () { // Overwrite the parent's update function
-  if(!this.disabled){
+  if(!this.disabled && !Game.powerPellet_effect){
     this.scaredModel.loadedMeshes[0].visibility = 0; // Hide the scared model
     this.objectModel.loadedMeshes[0].visibility = 1; // Show the default model
     this.objectModel.loadedMeshes[0].position = scene.getMeshByName('orangeGhostModel').position; // Set the model position with the placeholder's position
@@ -82,6 +82,7 @@ OrangeGhost.prototype.update = function () { // Overwrite the parent's update fu
   if(Game.powerPellet_effect){ // If power pellet is at effect
     this.scaredModel.loadedMeshes[0].visibility = 0; // Hide the scared model
     this.scared();
+    this.newPath();
   }
 
   /*
