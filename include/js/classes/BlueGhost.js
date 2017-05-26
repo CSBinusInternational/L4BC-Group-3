@@ -5,7 +5,6 @@ class BlueGhost extends Ghost {
     this.start_pos = {x: 16, y: 13};
     this.my_model = null;
     this.prev_position;
-    this.path_to_follow = null;
   }
 }
 
@@ -44,6 +43,8 @@ BlueGhost.prototype.start = function () { // Overwrite the parent's start functi
 
 BlueGhost.prototype.update = function () { // Overwrite the parent's update function
   if(!this.disabled){
+    this.scaredModel.loadedMeshes[0].visibility = 0; // Hide the scared model
+    this.objectModel.loadedMeshes[0].visibility = 1; // Show the default model
     this.objectModel.loadedMeshes[0].position = scene.getMeshByName('blueGhostModel').position; // Set the model position with the placeholder's position
 
     if(this.direction == 1)
@@ -76,6 +77,10 @@ BlueGhost.prototype.update = function () { // Overwrite the parent's update func
         this.path_to_follow.splice(1,1);
       }
     }
+  }
+
+  if(Game.powerPellet_effect){ // If power pellet is at effect
+    this.scared();
   }
 
   /*

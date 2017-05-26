@@ -41,6 +41,8 @@ RedGhost.prototype.start = function () { // Overwrite the parent's start functio
 
 RedGhost.prototype.update = function () { // Overwrite the parent's update function
   if(!this.disabled){
+    this.scaredModel.loadedMeshes[0].visibility = 0; // Hide the scared model
+    this.objectModel.loadedMeshes[0].visibility = 1; // Show the default model
     this.objectModel.loadedMeshes[0].position = scene.getMeshByName('redGhostModel').position; // Set the model position with the placeholder's position
     var player_object = EntityManager.getEntity("player"); // Get the player
     var start_node = new Node(this.position, 0, 0);        // Set the starting node as the ghost's position
@@ -76,6 +78,11 @@ RedGhost.prototype.update = function () { // Overwrite the parent's update funct
     this.moveTo(paths[1]);
     // console.log(this.position, paths[0], paths[1]);
     this.move();
+  }
+
+  if(Game.powerPellet_effect){ // If power pellet is at effect
+    this.scaredModel.loadedMeshes[0].visibility = 0; // Hide the scared model
+    this.scared();
   }
 
   /*

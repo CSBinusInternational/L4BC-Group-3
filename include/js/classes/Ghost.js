@@ -14,6 +14,9 @@ class Ghost{
     this.direction = Math.round((Math.random() * 10) % 4); // Player move direction (0: up, 1: left, 2: down, 3: right)
     this.disabled = false;
     this.disabled_timer = 1000;
+    this.scaredModel = null;
+    this.path_to_follow = [];
+    this.path_scared = [];
   }
 }
 
@@ -41,6 +44,19 @@ Ghost.prototype.moveTo = function (new_coordinate) {
       this.direction = (new_coordinate.y > this.position.y ? 2 : 0); // If the new Y coordinate is bigger the current Y cooridinate, move down; else move up
     }
   }
+};
+
+Ghost.prototype.awake = function () { // Will be executed before start function
+  var that = this;
+  setTimeout(function(){
+    var loader = new BABYLON.AssetsManager(scene);
+    var scaredGhost = loader.addMeshTask(this.meshName+"_scared", "", "include/models/", "ghost-scared.obj");
+    loader.load();
+    setTimeout(function(){
+      that.scaredModel = scaredGhost;
+      console.log(that.scaredModel);
+    },50);
+  }, 2000);
 };
 
 Ghost.prototype.start = function () {
@@ -148,4 +164,79 @@ Ghost.prototype.moveToSpawn = function () {
 
   scene.getMeshByName(this.meshName).position.z = this.position.x - size.x / 2;
   scene.getMeshByName(this.meshName).position.x = this.position.y - size.y / 2;
+};
+
+Ghost.prototype.scared = function () {
+  /*
+   * When the ghost is scared, it should move to a random location on the map.
+   * Once the power pellet effect wore off, it should continue doing what its
+   * doing before it got scared
+   */
+
+  this.objectModel.loadedMeshes[0].visibility = 0; // Hide the default model
+  this.scaredModel.loadedMeshes[0].visibility = 1; // Show the scared model
+  this.scaredModel.loadedMeshes[0].position = scene.getMeshByName(this.meshName).position; // Set the model position with the placeholder's position
+
+  if(this.direction == 1)
+  this.objectModel.loadedMeshes[0].rotation.y = 0; // Look left when the direction is 1 (left)
+
+  if(this.direction == 3)
+  this.objectModel.loadedMeshes[0].rotation.y = 179; // Look right when the direction is 3 (right)
+
+  if(this.direction == 0)
+  this.objectModel.loadedMeshes[0].rotation.y = 89.5; // Look up when the direction is 0 (up)
+
+  if(this.direction == 2)
+  this.objectModel.loadedMeshes[0].rotation.y = 180.5; // Look down when the direction is 2 (down)
+
+  /*
+  * To get a random behaviour in the blue ghost, select a random point in the
+  * map and follow the path excatly to that spot. Once the spot has been
+  * reached, randomize another point.
+  */
+
+  if(this.path_scared.length <= 1)
+  this.getRandomLocation();
+
+  this.moveTo(this.path_scared[1]);
+  this.move();
+
+  /* Remove the current node when the ghost has arived to the current node */
+  if(this.path_scared[1] && this.position){
+   if(this.position.x == this.path_scared[1].x && this.position.y == this.path_scared[1].y){
+     this.path_scared.splice(1,1);
+   }
+  }
+};
+
+Ghost.prototype.getRandomLocation = function () {
+  var start_node = new Node(this.position, 0, 0);        // Set the starting node as the ghost's position
+  var random_end = {x: Math.round(Math.random() * 100) % Game.map[0].length, y: Math.round(Math.random() * 100) % Game.map.length};
+
+  var end_node = new Node(random_end, 0, 0); // Set the ending node to the player's position
+  as = new AStar(start_node, end_node);                  // Create new instance of the algorithm
+  var paths = as.solve(false, function(loc){             // Call solver function
+    /*
+     * The valid move checker function. This function will be used by the
+     * algorithm to determine if the next node is a valid node.
+     */
+
+   if(loc.x < 0 || loc.x >= Game.map[0].length || loc.y < 0 || loc.y >= Game.map.length) // Check if the current node is in the map
+   return false;
+
+   if(Game.map[loc.y][loc.x].collide) // Check if the current node is a wall
+   return false;
+
+   return true;
+  });
+
+  this.path_scared = paths; // Save the paths
+
+  for(var i = 0; i < paths.length; i++){
+    if((paths[i].x >= 11 && paths[i].x <= 16) && (paths[i].y >= 13 && paths[i].y <= 15)){
+      if(paths[i].x == 14 && (paths[i].y >= 12 && paths[i].y <= 14)){
+        paths.splice(paths.length - 1, 1)// Pop the path to prevent stucking
+      }
+    }
+  }
 };
