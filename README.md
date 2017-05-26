@@ -2,22 +2,22 @@
 *A game of Pacman*
 
 ## **Table of Content** ##
-- **Overview**
+- [**Overview**](#overview)
   - Theme / Setting / Genre
   - Core Gameplay Mechanics Brief
   - Targeted platforms
   - Project Scope
   - Project Description
-- **Story and Gameplay**
+- [**Story and Gameplay**](#story-and-gameplay)
   - Story (Brief)
   - Story (Detailed)
   - Gameplay (Brief)
   - Gameplay (Detailed)
-- **Assets Needed**
+- [**Assets Needed**](#assets-needed)
   - 2D
   - 3D
   - Animation
-- **Schedule**
+- [**Schedule**](#schedule)
 
 ## **Overview** ##
 ### Theme / Setting / Genre ###
