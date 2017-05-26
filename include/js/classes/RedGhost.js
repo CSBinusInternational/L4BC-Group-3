@@ -12,7 +12,7 @@ RedGhost.prototype.start = function () { // Overwrite the parent's start functio
   setTimeout(function(){
     var faceColors = new Array(6);
     for(var i = 0; i < 6; i++)
-      faceColors[i] = new BABYLON.Color4(1,0,0,1);   // red
+      faceColors[i] = new BABYLON.Color4(1,0,0,0);   // red
 
     var options = {
       width: 0.01,
@@ -35,7 +35,7 @@ RedGhost.prototype.start = function () { // Overwrite the parent's start functio
     loader.load();
     setTimeout(function(){
       that.objectModel = redGhost;
-    },50)
+    },50);
   },2000);
 };
 
