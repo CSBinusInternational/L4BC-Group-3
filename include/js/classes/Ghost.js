@@ -146,6 +146,7 @@ Ghost.prototype.onEatenByPlayer = function (callback) {
 
       if(EntityManager.entityList[i].position.x == this.position.x && EntityManager.entityList[i].position.y == this.position.y){
         EntityManager.getEntity('player').score += 20;
+        EntityManager.getEntity('player').eaten_ghost_count++;
 
         if (typeof callback == 'function')
         callback();

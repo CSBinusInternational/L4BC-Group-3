@@ -72,10 +72,11 @@ setTimeout(function(){
           box.position.y = 0;
           wallCount++;
         }else if(currentTile.isFood){
-          if(!currentTile.powerPellet)
+          if(!currentTile.powerPellet) // 240
             var pellet = BABYLON.Mesh.CreateSphere("pellet"+(Game.map[0].length * x + y), 1, 0.4, scene);
-          else
+          else // 4
             var pellet = BABYLON.Mesh.CreateSphere("pellet"+(Game.map[0].length * x + y), 1, 0.9, scene);
+            console.log('asd');
 
           pellet.position.z = x - size.x / 2;
           pellet.position.x = y - size.y / 2;

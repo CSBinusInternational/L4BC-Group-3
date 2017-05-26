@@ -7,6 +7,8 @@ class Player{
     this.allow_move = true;               // Valid or invalid move
     this.has_teleport = false;
     this.score = 0;                       // Track the player's score
+    this.eaten_pellet_count = 0;
+    this.eaten_ghost_count = 0;
   }
 }
 
@@ -41,13 +43,16 @@ Player.prototype.start = function () {
 };
 
 Player.prototype.update = function () {
+  if(this.eaten_pellet_count == 244) // Win condition
+  alert('You win!');
+
   this.playerMod.loadedMeshes[1].position = scene.getMeshByName('playerModel').position; // Set the model position with the placeholder's position
   for(var i = 0; i < EntityManager.entityList.length; i++){
     if(game_start && !Game.powerPellet_effect){
       if(EntityManager.entityList[i].tagName == this.tagName)
         continue;
 
-      if(EntityManager.entityList[i].position.x == this.position.x && EntityManager.entityList[i].position.y == this.position.y){
+      if(EntityManager.entityList[i].position.x == this.position.x && EntityManager.entityList[i].position.y == this.position.y){ // Died condition
         game_start = false;
         this.position = EntityManager.entityList[i].position;
         alert('You died!');
@@ -174,6 +179,7 @@ Player.prototype.update = function () {
       Game.map[this.position.y][this.position.x].hasFood = 0; // Remove the reference in the world map
       scene.getMeshByName("pellet"+(Game.map[0].length * this.position.x + this.position.y)).dispose(); // Remove the pellet reference from the game
       document.getElementById('player-score').innerText = this.score * 10; // Update UI score
+      this.eaten_pellet_count++;
     }
   }
 
