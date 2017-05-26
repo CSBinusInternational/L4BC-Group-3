@@ -43,38 +43,55 @@ OrangeGhost.prototype.start = function () { // Overwrite the parent's start func
 };
 
 OrangeGhost.prototype.update = function () { // Overwrite the parent's update function
-  this.objectModel.loadedMeshes[0].position = scene.getMeshByName('orangeGhostModel').position; // Set the model position with the placeholder's position
+  if(!this.disabled){
+    this.objectModel.loadedMeshes[0].position = scene.getMeshByName('orangeGhostModel').position; // Set the model position with the placeholder's position
 
-  if(this.direction == 1)
-  this.objectModel.loadedMeshes[0].rotation.y = 0; // Look left when the direction is 1 (left)
+    if(this.direction == 1)
+    this.objectModel.loadedMeshes[0].rotation.y = 0; // Look left when the direction is 1 (left)
 
-  if(this.direction == 3)
-  this.objectModel.loadedMeshes[0].rotation.y = 179; // Look right when the direction is 3 (right)
+    if(this.direction == 3)
+    this.objectModel.loadedMeshes[0].rotation.y = 179; // Look right when the direction is 3 (right)
 
-  if(this.direction == 0)
-  this.objectModel.loadedMeshes[0].rotation.y = 89.5; // Look up when the direction is 0 (up)
+    if(this.direction == 0)
+    this.objectModel.loadedMeshes[0].rotation.y = 89.5; // Look up when the direction is 0 (up)
 
-  if(this.direction == 2)
-  this.objectModel.loadedMeshes[0].rotation.y = 180.5; // Look down when the direction is 2 (down)
+    if(this.direction == 2)
+    this.objectModel.loadedMeshes[0].rotation.y = 180.5; // Look down when the direction is 2 (down)
 
-  /*
-   * To get a random behaviour in the orange ghost, select a random point in the
-   * map and follow the path excatly to that spot. Once the spot has been
-   * reached, randomize another point.
-   */
+    /*
+     * To get a random behaviour in the orange ghost, select a random point in the
+     * map and follow the path excatly to that spot. Once the spot has been
+     * reached, randomize another point.
+     */
 
-  if(this.path_to_follow.length == 1)
-  this.newPath();
+    if(this.path_to_follow.length == 1)
+    this.newPath();
 
-  this.moveTo(this.path_to_follow[1]);
-  this.move();
+    this.moveTo(this.path_to_follow[1]);
+    this.move();
 
-  /* Remove the current node when the ghost has arived to the current node */
-  if(this.path_to_follow[1] && this.position){
-    if(this.position.x == this.path_to_follow[1].x && this.position.y == this.path_to_follow[1].y){
-      this.path_to_follow.splice(1,1);
+    /* Remove the current node when the ghost has arived to the current node */
+    if(this.path_to_follow[1] && this.position){
+      if(this.position.x == this.path_to_follow[1].x && this.position.y == this.path_to_follow[1].y){
+        this.path_to_follow.splice(1,1);
+      }
     }
   }
+
+  /*
+   * Check if the current NPC has been eaten by the player. Once the ghost is
+   * eaten by the player, the ghost will teleport back to spaw then wait for 1
+   * second before chasing the player
+   */
+  var that = this; // Reference the current object so that we can set a timer
+  this.onEatenByPlayer(function(){ // The function that checks when the ghost is eaten
+    that.moveToSpawn(); // Teleport to spawn
+    that.disabled = true; // Disable the AI
+    setTimeout(function(){ // Wait before executing the function
+      that.disabled = false; // Re-enable AI
+      that.newPath(); // Re-generate new path for the AI to take once enabled
+    }, that.disabled_timer);
+  });
 };
 
 OrangeGhost.prototype.newPath = function () {

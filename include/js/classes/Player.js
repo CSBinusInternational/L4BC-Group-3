@@ -43,7 +43,7 @@ Player.prototype.start = function () {
 Player.prototype.update = function () {
   this.playerMod.loadedMeshes[1].position = scene.getMeshByName('playerModel').position; // Set the model position with the placeholder's position
   for(var i = 0; i < EntityManager.entityList.length; i++){
-    if(game_start){
+    if(game_start && !Game.powerPellet_effect){
       if(EntityManager.entityList[i].tagName == this.tagName)
         continue;
 
@@ -165,10 +165,15 @@ Player.prototype.update = function () {
 
     // Eat the food pellet
     if(Game.map[this.position.y][this.position.x].hasFood){
-      this.score++; // Increment player's score
+      if(Game.map[this.position.y][this.position.x].powerPellet){ // Check if the player eat a power pellet or ordinary food
+        this.score += 5; // Add 5 to the score
+        Game.activatePowerPellet(); // Activate power pellet effect
+      }else
+        this.score++; // Increment player's score
+
       Game.map[this.position.y][this.position.x].hasFood = 0; // Remove the reference in the world map
       scene.getMeshByName("pellet"+(Game.map[0].length * this.position.x + this.position.y)).dispose(); // Remove the pellet reference from the game
-      document.getElementById('player-score').innerText = this.score; // Update UI score
+      document.getElementById('player-score').innerText = this.score * 10; // Update UI score
     }
   }
 

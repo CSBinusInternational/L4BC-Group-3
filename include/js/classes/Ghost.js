@@ -12,6 +12,8 @@ class Ghost{
 
     /* Set the default starting direction. Make it random to make the game interesting */
     this.direction = Math.round((Math.random() * 10) % 4); // Player move direction (0: up, 1: left, 2: down, 3: right)
+    this.disabled = false;
+    this.disabled_timer = 1000;
   }
 }
 
@@ -118,4 +120,32 @@ Ghost.prototype.checkSquare = function () {
   }
 
   return {'x': tmp_x, 'y': tmp_y, raw: {'x': tmp_x, 'y': tmp_y}};
+};
+
+Ghost.prototype.onEatenByPlayer = function (callback) {
+  for(var i = 0; i < EntityManager.entityList.length; i++){
+    if(game_start && Game.powerPellet_effect){
+      if(EntityManager.entityList[i].tagName != 'player')
+        continue;
+
+      if(EntityManager.entityList[i].position.x == this.position.x && EntityManager.entityList[i].position.y == this.position.y){
+        EntityManager.getEntity('player').score += 20;
+
+        if (typeof callback == 'function')
+        callback();
+
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
+
+Ghost.prototype.moveToSpawn = function () {
+  this.position = {x: Math.floor(Math.random() * 5) + 11,
+                   y: Math.floor(Math.random() * 2) + 13};
+
+  scene.getMeshByName(this.meshName).position.z = this.position.x - size.x / 2;
+  scene.getMeshByName(this.meshName).position.x = this.position.y - size.y / 2;
 };

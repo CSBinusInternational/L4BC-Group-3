@@ -1,5 +1,15 @@
 require(['include/js/classes/Player.js']);
-var Game = {};
+var Game = {
+  powerPellet_effect: false,
+  powerPellet_duration: 8000,
+  activatePowerPellet: function(){
+    Game.powerPellet_effect = true;
+
+    setTimeout(function(){
+      Game.powerPellet_effect = false;
+    }, Game.powerPellet_duration);
+  }
+};
 Game.map = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0],
