@@ -179,16 +179,16 @@ Ghost.prototype.scared = function () {
   this.scaredModel.loadedMeshes[0].position = scene.getMeshByName(this.meshName).position; // Set the model position with the placeholder's position
 
   if(this.direction == 1)
-  this.objectModel.loadedMeshes[0].rotation.y = 0; // Look left when the direction is 1 (left)
+  this.scaredModel.loadedMeshes[0].rotation.y = 0; // Look left when the direction is 1 (left)
 
   if(this.direction == 3)
-  this.objectModel.loadedMeshes[0].rotation.y = 179; // Look right when the direction is 3 (right)
+  this.scaredModel.loadedMeshes[0].rotation.y = 179; // Look right when the direction is 3 (right)
 
   if(this.direction == 0)
-  this.objectModel.loadedMeshes[0].rotation.y = 89.5; // Look up when the direction is 0 (up)
+  this.scaredModel.loadedMeshes[0].rotation.y = 89.5; // Look up when the direction is 0 (up)
 
   if(this.direction == 2)
-  this.objectModel.loadedMeshes[0].rotation.y = 180.5; // Look down when the direction is 2 (down)
+  this.scaredModel.loadedMeshes[0].rotation.y = 180.5; // Look down when the direction is 2 (down)
 
   /*
   * To get a random behaviour in the blue ghost, select a random point in the
