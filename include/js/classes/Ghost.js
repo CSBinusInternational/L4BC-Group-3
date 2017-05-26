@@ -54,7 +54,7 @@ Ghost.prototype.awake = function () { // Will be executed before start function
     loader.load();
     setTimeout(function(){
       that.scaredModel = scaredGhost;
-      console.log(that.scaredModel);
+      // console.log(that.scaredModel);
     },50);
   }, 2000);
 };

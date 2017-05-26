@@ -134,5 +134,5 @@ BlueGhost.prototype.newPath = function () {
     }
   }
 
-  console.log(paths);
+  // console.log(paths);
 };
