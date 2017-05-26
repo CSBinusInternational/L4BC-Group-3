@@ -43,8 +43,11 @@ Player.prototype.start = function () {
 };
 
 Player.prototype.update = function () {
-  if(this.eaten_pellet_count == 244) // Win condition
-  alert('You win!');
+  if(this.eaten_pellet_count == 244){ // Win condition
+    alert('You win!');
+    this.eaten_pellet_count = 0;
+    game_start = false;
+  }
 
   this.playerMod.loadedMeshes[1].position = scene.getMeshByName('playerModel').position; // Set the model position with the placeholder's position
   for(var i = 0; i < EntityManager.entityList.length; i++){
