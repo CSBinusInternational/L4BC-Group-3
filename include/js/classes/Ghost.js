@@ -195,8 +195,10 @@ Ghost.prototype.scared = function () {
   * reached, randomize another point.
   */
 
-  if(this.path_scared.length <= 1)
+  if(this.path_scared.length <= 2)
   this.getRandomLocation();
+
+  // console.log(this.path_scared);
 
   this.moveTo(this.path_scared[1]);
   this.move();
