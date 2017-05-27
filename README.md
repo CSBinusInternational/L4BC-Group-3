@@ -90,7 +90,7 @@ No 2D assets where used
     - Ghost’s Floating Animation for moving
 
 ## **Schedule** ##
-![Schedule](documentation/Schedule.png)
+![Schedule](https://raw.githubusercontent.com/CSBinusInternational/L4BC-Group-3/55358eed57abcaefab7b30c90f907008ff3dd236/documentation/schedule.png)
 
   [4eb6040a]: https://github.com/krisnarocks "Stanislaus Krisna's Github"
   [09a79b58]: https://github.com/glaciesice "Andre Valentino's Github"
