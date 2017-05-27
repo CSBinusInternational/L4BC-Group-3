@@ -22,7 +22,7 @@
 ## **Overview** ##
 ### Theme / Setting / Genre ###
 - **Theme**
-  - Insert theme here
+  - Retro Game
 - **Setting**
   - Mysterious Maze
 - **Genre**
@@ -47,20 +47,26 @@
   - Stanislaus Krisna (1901498492 / [krisnarocks][4eb6040a])
     - Game logic programmer
   - Andre Valentino (1901531546 / [glaciesice][09a79b58])
-    - What does he/she do?
+    - Character modelling and video editing
   - Fenbert (1901523286 / [fenbertlim][3d05666e])
-    - What does he/she do?
+    - Video content and game mechanics
+
+- **Library Used**
+  - Require.js ([https://github.com/requirejs/requirejs](https://github.com/requirejs/requirejs))
+  - Babylon.js ([https://github.com/BabylonJS/Babylon.js](https://github.com/BabylonJS/Babylon.js))
+  - Hand.js ([https://github.com/deltakosh/handjs](https://github.com/deltakosh/handjs))
+
+![Pacman screenshot](documentation/the_game.png)
 
 ### Project Description ###
-Four Paragraphs or more If needs be
-
-No more than six paragraphs
+Pac Man is an old fashioned 2D retro game. This project’s objective is to upgrade the old game and take it to the next level by implementing it in a 3D world.
 
 ## **Story and Gameplay** ##
 ### Story ###
 Pac-man is a story of a guy who had a dream about becoming a pilot. But all cannot be done because he is trapped in a maze which is guarded by some ghost. The ghosts is who blocks his dream is his own fear. To pursue his dream, Pac-man should eat all the pills to free himself from the ghosts.
 
 ### Gameplay ###
+The objective of this game is to eat all of the pellets available in the map. There are two kinds of pellets, the regular pellet and the power pellet. Regular pellet gives 10 points and it is distributed all across the map. Then, there is the power pellet which gives 50 points each but there is only 4 of it in the map. What makes power pellet special is that when the player eats the pellet, the player turns the ghosts eatable for eight seconds and immobilize the eaten ghosts for one second. When the pac-man eat the ghosts, pac-man will be rewarded by 200 points for each ghosts eaten. All Points are calculated on the bottom left corner of the browser. There are 2 warp portals on the left and the right. Both warp portals warps to each other. If pac-man collides with the ghosts, pac-man will die and the game ends by losing. When all available pellets in the map is finished, pac-man will end the game by winning.
 
 ## **Assets Needed** ##
 ### 2D ###
@@ -84,7 +90,7 @@ No 2D assets where used
     - Ghost’s Floating Animation for moving
 
 ## **Schedule** ##
-![Schedule](https://github.com/CSBinusInternational/L4BC-Group-3/blob/463c5732df23fd4955b81c58ee2204c19479835e/documentation/schedule.png)
+![Schedule](documentation/Schedule.png)
 
   [4eb6040a]: https://github.com/krisnarocks "Stanislaus Krisna's Github"
   [09a79b58]: https://github.com/glaciesice "Andre Valentino's Github"
