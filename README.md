@@ -81,6 +81,11 @@ No 2D assets where used
   - Scared Ghost (Hidden)
 - Environmental Art Lists
   - Default cube primitives
+### Custom script ###
+- Pathfinding Algorithm
+  - The NPC uses A* pathfinding algorithm with the Manhattan Distance heuristics. Not all NPC uses the same implementation of the algorithm because it will be impossible for the player to finish a game since all the ghost will have the optimal path to the player. Instead, from 4 NPC, only one will follow the player, 1 will go to the last position when the fastest path is calculated, and the other two NPC will go to a random position on the map. The A* script used in this project is a port from Stanislaus Krisna’s Java implementation.
+- Collision detection
+  - Since using the built-in collision detection from babylonJS will to to inefficient (this project does not use/ require any physics simulation), it is required to write our own custom collision detection. One of the properties that is exploited is that the map is represented as a 2D array which is possible to reference the map and check collision based on the wall position inside the 2D array. To check collision with the ghost, a loop to check all ghost position must be made from the player. Each ghost will also check for collision with the player with similar manner. Instead of looping the list of entities, all the NPC has to do is ask the entity manager for the player object to check for the coordinate and use an if statement to check for collision. This is only done when the player eat a power pellet and only run for eight seconds.
 
 ### Animation ###
 - Character Animations
